@@ -31,7 +31,7 @@ public class RealTestExample {
 
         String actual1 =  driver.getCurrentUrl();
         String expected1 =  "https://www.godaddy.com/";
-        if (actual.equals(expected)){
+        if (actual1.equals(expected1)){
             System.out.println("Passed");
         }else{
             System.out.println("Not passed");

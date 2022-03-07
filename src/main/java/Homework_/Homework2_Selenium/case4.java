@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.v95.network.model.WebTransportCreated;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class case4 {
@@ -50,7 +51,36 @@ public class case4 {
         WebElement continueButton = driver.findElement(By.xpath("//input[@id='continue']"));
         continueButton.click();
         String currentUrl = driver.getCurrentUrl();
-        System.out.println(currentUrl);
+//        System.out.println(currentUrl);
+//        String expectedUrl = "https://www.saucedemo.com/checkout-step-two.html";
+//        if(currentUrl.contains("checkout")){
+        boolean actUrl = currentUrl.contains("checkout");
+        boolean expectetd = true;
+        Assert.assertEquals(actUrl,expectetd);
+
+
+        WebElement itemTotalPrice = driver.findElement(By.xpath("//div[@class='summary_subtotal_label']"));
+        String actualPrice = itemTotalPrice.getText();
+        System.out.println(actualPrice);
+        String expected = "Item total: $79.98";
+        Assert.assertEquals(actualPrice,expected);
+
+        WebElement total = driver.findElement(By.xpath("//div[@class='summary_total_label']"));
+        String actualTotal1 = total.getText();
+        System.out.println(actualTotal1);
+        String expectedTotal1 = "Total: $86.38";
+        Assert.assertEquals(actualTotal1,expectedTotal1);
+        Thread.sleep(1000);
+
+        WebElement finishButton = driver.findElement(By.xpath("//button[@id='finish']"));
+        finishButton.click();
+        WebElement finalMsg = driver.findElement(By.xpath("//h2[@class='complete-header']"));
+        String actualMsg = finalMsg.getText();
+        System.out.println(actualMsg);
+        String expetedMsg = "THANK YOU FOR YOUR ORDER";
+        Assert.assertEquals(actualMsg,expetedMsg);
+        Thread.sleep(6000);
+        driver.quit();
 
 
     }

@@ -2,15 +2,13 @@ package Action;
 
 import Utils.BrowserUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.sql.Driver;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,10 +42,10 @@ public class ActionClassMethods {
         List<String> expectedNames = Arrays.asList("");
         for (int i = 0; i<names.size();i++){
             Thread.sleep(2000);
+
             actions.moveToElement(pictures.get(i)).perform();
             Assert.assertEquals(BrowserUtils.getTextMethode(names.get(i)),expectedNames.get(i));
             System.out.println(BrowserUtils.getTextMethode(names.get(i)));
-
            }
         }
 
@@ -141,7 +139,6 @@ public class ActionClassMethods {
           actions.clickAndHold(draggable).moveToElement(bluebox1).release().perform();
       }
 
-    //please use drag and drop
 
 
 
@@ -207,7 +204,82 @@ public class ActionClassMethods {
          String finalActualBoxMessage = BrowserUtils.getTextMethode(colorDropHere1);
          String expectedActualBoxMessage = "Dropped!";
          Assert.assertEquals(finalActualBoxMessage, expectedActualBoxMessage);
+
      }
+     @Test
+    public void moveByOffSET() {
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://the-internet.herokuapp.com/horizontal_slider");
+        WebElement slider = driver.findElement(By.xpath("//input"));
+        driver.manage().window().maximize();
+        Actions actions = new Actions(driver);
+        actions.clickAndHold(slider).moveByOffset(-30,0).perform();
+     }
+
+
+
+     @Test
+    public void sliderShortCutO() throws InterruptedException {
+         WebDriverManager.chromedriver().setup();
+         WebDriver driver = new ChromeDriver();
+         driver.get("https://the-internet.herokuapp.com/horizontal_slider");
+         WebElement slider = driver.findElement(By.xpath("//input"));
+         WebElement range = driver.findElement(By.xpath("//span[@id='range']"));
+         String myrange = "3.5";
+         while (!range.getText().trim().equals(myrange)) {
+             Thread.sleep(1000);
+             slider.sendKeys(Keys.ARROW_RIGHT);
+         }
+     }
+
+
+
+       @Test
+        public void MoveOffSetPractice(){
+           WebDriverManager.chromedriver().setup();
+           WebDriver driver = new ChromeDriver();
+           driver.get("http://www.techtorialacademy.com/");
+           WebElement contactUs = driver.findElement(By.xpath("//div[@class=\"navigation hidden-xs\"]//a[.='Contact Us']"));
+           Point location = contactUs.getLocation();
+           int xCord = location.getX();
+           int yCord = location.getY();
+           Actions actions = new Actions(driver);
+           actions.moveByOffset(xCord,yCord).click().perform();
+/*
+@Test
+    public void MoveByOffSetPractice(){
+        //TASK
+        //By using move by off set and point class.
+        //Click Contact Us
+
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver= new ChromeDriver();
+        driver.get("http://www.techtorialacademy.com/");
+        WebElement contactUs=driver.findElement(By.xpath("//div[@class='navigation hidden-xs']//a[.='Contact Us']"));
+        Point coordinatesOfContactUs=contactUs.getLocation();
+        int xCoord=coordinatesOfContactUs.getX();
+        int yCoord=coordinatesOfContactUs.getY();
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(xCoord,yCoord).click().perform();
+    }
+ */
+       }
+    @Test
+    public void MoveByOffSetPractice(){
+        //TASK
+        //By using move by off set and point class.
+        //Click Contact Us
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver= new ChromeDriver();
+        driver.get("http://www.techtorialacademy.com/");
+        WebElement contactUs=driver.findElement(By.xpath("//div[@class='navigation hidden-xs']//a[.='Contact Us']"));
+        Point coordinatesOfContactUs=contactUs.getLocation();
+        int xCoord=coordinatesOfContactUs.getX();
+        int yCoord=coordinatesOfContactUs.getY();
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(xCoord,yCoord).click().perform();
+    }
 }
 
 

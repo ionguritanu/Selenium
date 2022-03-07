@@ -37,7 +37,7 @@ public class cars {
         WebElement prices = driver.findElement(By.xpath("//select[@id='make-model-max-price']"));
         Select price = new Select(prices);
         price.selectByIndex(7);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         WebElement distances = driver.findElement(By.xpath("//select[@id='make-model-maximum-distance']"));
         Select distance = new Select(distances);

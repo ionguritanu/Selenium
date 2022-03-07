@@ -32,6 +32,5 @@ public class SelectBasics {
         for(WebElement option1 : options){
             System.out.println( option1.getText().trim());
         }
-
     }
 }
