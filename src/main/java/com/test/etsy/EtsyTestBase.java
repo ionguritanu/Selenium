@@ -1,5 +1,6 @@
 package com.test.etsy;
 
+import Utils.ConfigReader;
 import Utils.DriverHelper;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -12,6 +13,7 @@ public class EtsyTestBase {
     @BeforeMethod
     public void setup(){
         driver = DriverHelper.getDriver();
+        //driver.get(ConfigReader.readProperty("etsyUrl"));
         driver.get("https://www.etsy.com/");
    }
 
